@@ -1,6 +1,7 @@
 import {useState} from 'react';
-import AddMarker from './AddMarker/AddMarker';
+
 import './PlaceSearch.css'
+
 
 function PlaceSearch (){
 
@@ -15,7 +16,6 @@ function PlaceSearch (){
       e.preventDefault()
       setPlace(InputText)
       // setInputText('')
-  
     }
 
     return(

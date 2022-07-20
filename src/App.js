@@ -1,10 +1,11 @@
 import './App.css';
 import MakeMapPage from './makeMap/MakeMapPage';
+import AddMarker from './makeMap/AddMarker';
 
 function App() {
   return (
     <div className="App">
-      <MakeMapPage></MakeMapPage>
+      <AddMarker></AddMarker>
     </div>
   );
 }

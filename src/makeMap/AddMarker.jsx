@@ -1,18 +1,22 @@
 import {useState, useEffect} from 'react'
 import {Map, MapMarker} from 'react-kakao-maps-sdk'
+import SearchButton from './SearchButton'
+import PlaceSearch from './PlaceSearch'
+import BgChange from './BgChange'
 
 function AddMarker (){
   const [info, setInfo] = useState()
   const [markers, setMarkers] = useState([])
   const [map, setMap] = useState()
-
+  const [location, setLocation] = useState("신도림 핀포인트")
+  const [onInput, setOnInput] = useState(false)
   const {kakao} = window;
 
   useEffect(() => {
     if (!map) return
     const ps = new kakao.maps.services.Places()
 
-    ps.keywordSearch("이태원 맛집", (data, status, _pagination) => {
+    ps.keywordSearch(location, (data, status, _pagination) => {
       if (status === kakao.maps.services.Status.OK) {
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
@@ -40,30 +44,38 @@ function AddMarker (){
   }, [map])
 
   return (
-    <Map // 로드뷰를 표시할 Container
-      center={{
-        lat: 37.566826,
-        lng: 126.9786567,
-      }}
-      style={{
-        width: "100%",
-        height: "350px",
-      }}
-      level={3}
-      onCreate={setMap}
-    >
-      {markers.map((marker) => (
-        <MapMarker
-          key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
-          position={marker.position}
-          onClick={() => setInfo(marker)}
-        >
-          {info &&info.content === marker.content && (
-            <div style={{color:"#000"}}>{marker.content}</div>
-          )}
-        </MapMarker>
-      ))}
-    </Map>
+    <>
+      {onInput == true &&
+        <>
+          <BgChange/>
+          <PlaceSearch/>
+        </>
+      }
+      <Map // 로드뷰를 표시할 Container
+        center={{
+          lat: 37.508889538403885, lng: 126.88696767750605,
+        }}
+        style={{
+          width: "100vw",
+          height: "100vh",
+        }}
+        level={3}
+        onCreate={setMap}
+      >
+        {markers.map((marker) => (
+          <MapMarker
+            key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
+            position={marker.position}
+            onClick={() => setInfo(marker)}
+          >
+            {info &&info.content === marker.content && (
+              <div style={{color:"#000"}}>{marker.content}</div>
+            )}
+          </MapMarker>
+        ))}
+      </Map>
+      <SearchButton onInput={onInput} setOnInput={setOnInput}></SearchButton>
+    </>
   )
 }
 
