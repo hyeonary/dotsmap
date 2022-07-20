@@ -6,7 +6,7 @@
     width: 100%;
     position: absolute;
     z-index: 7;
-    bottom: 50%;
+    bottom: 70%;
     left: 25%;
     background: transparent;
 }
@@ -22,7 +22,7 @@ input {
 }
 
 .inputButton {
-    font-size: 15px;
+    font-size: 18px;
     color: white;
     width: 8%;
     height: 50px;

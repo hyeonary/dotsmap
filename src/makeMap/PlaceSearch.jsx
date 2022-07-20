@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import AddMarker from './AddMarker/AddMarker';
 import './PlaceSearch.css'
 
 function PlaceSearch (){
@@ -13,14 +14,17 @@ function PlaceSearch (){
     const handleSubmit = (e) => {
       e.preventDefault()
       setPlace(InputText)
-      setInputText('')
+      // setInputText('')
+  
     }
 
     return(
             <div className="inputDiv">
                 <form className="inputForm" onSubmit={handleSubmit}>
-                    <input className="inputbox" placeholder="장소를 입력하세요" onChange={onChange} value={InputText} />
-                    <button className="inputButton" type="submit">검색</button>
+                    <input className="inputbox" placeholder="기억에 남는 장소가 있나요?" onChange={onChange} value={InputText} />
+                    <button className="inputButton"
+                     type="submit"
+                     >검색</button>
                 </form>
             </div>
     )
