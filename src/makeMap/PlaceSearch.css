@@ -3,24 +3,32 @@
 }
 
 .inputDiv {
+    width: 100%;
     position: absolute;
-    z-index: 2;
-    top: 15px;
-    left: 20px;
+    z-index: 7;
+    bottom: 50%;
+    left: 25%;
+    background: transparent;
 }
 
 input {
-    width: 380px;
-    height: 27px;
-    border-radius: 8px;
-    padding-left: 20px;
+    width: 40%;
+    height: 54px;
+    outline: 0;
+    border-width: 0 0 4px;
+    border-color: rgb(106, 36, 225);
+    background: transparent;
+    font-size: 40px;
 }
 
-Button {
-    width: 60px;
-    height: 30px;
-    border: 2px solid #474EFE;
-    background-color: white;
+.inputButton {
+    font-size: 15px;
+    color: white;
+    width: 8%;
+    height: 50px;
+    margin-left: 8px; 
+    background: linear-gradient(90deg, rgb(106, 36, 225) -3.28%, rgb(73, 118, 220) 103.57%);
+    border: none;
     border-radius: 8px;
 }
 

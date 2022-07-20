@@ -1,14 +1,19 @@
-import PlaceSearch from "./PlaceSearch";
-import './SearchButton.css'
+import './SearchButton.css';
 
-function SearchButton (){
+function SearchButton ({inputPlace, setInputPlace}){
+  const onClick = () => {
+    {setInputPlace(!inputPlace)}
+  }
 
     return(
-        <div className='buttondiv'>
-            <button 
-                className='searchbutton'
-                style={{color: "white"}}
+        <div className='inputwrap'>
+            <div className='buttondiv'>
+                <button 
+                  className='searchbutton'
+                  style={{color: "white"}}
+                  onClick={onClick}
                 >장소 추가하기</button>
+            </div>
         </div>
     )
 }
