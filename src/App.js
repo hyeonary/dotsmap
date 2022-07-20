@@ -1,10 +1,10 @@
 import './App.css';
-import KakaoMap from './makeMap/KakaoMap.js'
+import MakeMapPage from './makeMap/MakeMapPage';
 
 function App() {
   return (
     <div className="App">
-      <KakaoMap></KakaoMap>
+      <MakeMapPage></MakeMapPage>
     </div>
   );
 }

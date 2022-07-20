@@ -10,3 +10,13 @@ body {
 .App {
   height: 100%;
 }
+
+@font-face {
+  font-family: "noto-sans";
+  src: url("../fonts/Noto_Sans_KR/NotoSansKR-Medium.otf")
+}
+
+@font-face {
+  font-family: "Diodrum-Medium";
+  src: url("../fonts/Diodrum_W03_Medium/Diodrum\ W03\ Medium.otf")
+}

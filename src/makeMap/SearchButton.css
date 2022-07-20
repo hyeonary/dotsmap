@@ -1,0 +1,17 @@
+.searchbutton {
+    width: 180px;
+    height: 60px;
+    border-radius: 15px;
+
+    background: linear-gradient(90deg, rgb(106, 36, 225) -3.28%, rgb(73, 118, 220) 103.57%);
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.buttondiv {
+    position: absolute;
+    z-index: 2;
+    top: 920px;
+    left: 1900px;
+
+}
