@@ -49,7 +49,6 @@ function AddMarker (){
       }
     })
   }, [map, searchPlace])
-  console.log(markers)
 
   return (
     <>
@@ -80,7 +79,8 @@ function AddMarker (){
           placeList == true ? 
             <div className="placecontainer">
             {markers.map((marker) => (       
-              <SearchList 
+              <SearchList
+                key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
                 markers={markers} 
                 marker={marker}
                 setInfo={setInfo}
@@ -88,7 +88,7 @@ function AddMarker (){
               ></SearchList>
             ))
             }
-            <button className="closeContainer" 
+            <button className="closebutton" 
               onClick={(()=>{setPlaceList(!placeList)
               setMarkers([])
               })}

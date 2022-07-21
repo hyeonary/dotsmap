@@ -15,3 +15,12 @@
   gap: 20px;
   padding: 20px;
 }
+
+.closebutton {
+  background: linear-gradient(90deg, rgb(106, 36, 225) -3.28%, rgb(73, 118, 220) 103.57%);
+  font-size: 15px;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  height: 30px;
+}

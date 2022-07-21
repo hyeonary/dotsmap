@@ -21,7 +21,7 @@ function PlaceSearch ({searchPlace, setSearchPlace, inputPlace, setInputPlace, p
     return(
             <div className="inputDiv">
                 <form className="inputForm" onSubmit={handleSubmit}>
-                    <input className="inputbox" placeholder="기억에 남는 장소가 있나요?" onChange={onChange} value={inputText} />
+                    <input className="inputbox" placeholder="찾고싶은 장소가 있나요?" onChange={onChange} value={inputText} />
                     <button className="inputButton"
                      type="submit"
                      >검색</button>
