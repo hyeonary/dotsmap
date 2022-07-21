@@ -1,8 +1,9 @@
 import './SearchButton.css';
 
-function SearchButton ({inputPlace, setInputPlace}){
+function SearchButton ({inputPlace, setInputPlace, setPlaceList}){
   const onClick = () => {
     {setInputPlace(!inputPlace)}
+    {setPlaceList(false)}
   }
 
     return(

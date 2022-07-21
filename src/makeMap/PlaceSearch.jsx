@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import './PlaceSearch.css'
 
-function PlaceSearch ({searchPlace, setSearchPlace, inputPlace, setInputPlace}){
+function PlaceSearch ({searchPlace, setSearchPlace, inputPlace, setInputPlace, placeList, setPlaceList}){
 
     const [inputText, setInputText] = useState('')
     //const [Place, setPlace] = useState('')
@@ -15,8 +15,9 @@ function PlaceSearch ({searchPlace, setSearchPlace, inputPlace, setInputPlace}){
       {setSearchPlace(inputText)}
       setInputText('')
       {setInputPlace(!inputPlace)}
+      {setPlaceList(!placeList)}
     }
-    console.log({searchPlace})
+
     return(
             <div className="inputDiv">
                 <form className="inputForm" onSubmit={handleSubmit}>

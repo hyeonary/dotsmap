@@ -1,0 +1,17 @@
+.maptag {
+  border: 2px solid #474EFE;
+  font-family: "noto-sans";
+  font-size: 11px;
+}
+
+.placecontainer {
+  display: flex;
+  flex-direction: column;
+  position: absolute; 
+  bottom: 20%;
+  z-index: 10;
+  background-color: white;
+  opacity: 0.8;
+  gap: 20px;
+  padding: 20px;
+}
