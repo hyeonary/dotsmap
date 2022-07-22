@@ -1,5 +1,4 @@
 import './App.css';
-import MakeMapPage from './makeMap/MakeMapPage';
 import AddMarker from './makeMap/AddMarker';
 
 function App() {
