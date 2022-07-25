@@ -1,11 +1,11 @@
-import {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import {Map, MapMarker, CustomOverlayMap} from 'react-kakao-maps-sdk'
 import SearchButton from './SearchButton';
 import BgChange from './PlaceInput/BgChange';
 import PlaceSearch from './PlaceInput/PlaceSearch';
 import SearchList from './SearchList';
-import './AddMarker.css'
 import FavoritePlace from './FavoritePlace/FavoritePlace';
+import './AddMarker.css'
 
 function AddMarker (){
   const {kakao} = window; // window 있어야 지도 출력됨
@@ -16,11 +16,13 @@ function AddMarker (){
   const [inputPlace, setInputPlace] = useState(false); // 인풋박스 on/off
   const [searchPlace, setSearchPlace] = useState(''); // 장소 검색
   const [placeList, setPlaceList] = useState(false); // 장소 검색 모달 on/off
-  const [onFav, setOnFav]  = useState(false);
-  const [favPlace, setFavPlace] = useState('');
-  const clickFav = () => {
-    setOnFav(!onFav)
-  }
+  const [onFav, setOnFav]  = useState(false); // 장소 리스트 모달 on/off
+  const [favPlace, setFavPlace] = useState(''); // 좋아하는 장소 이름 가져오기
+  const [pickedImg, setPickedImg] = useState(); // 선택한 이미지
+  const [reason, setReason] = useState(); //  유저가 적은 이유
+
+  const [newPlaces, setNewPlaces] = useState([]); // 유저가 저장한 장소 배열
+  const [description, setDescription] = useState(false);
 
   useEffect(() => {
     if (!map) return
@@ -36,14 +38,13 @@ function AddMarker (){
 
         for (var i = 0; i < data.length; i++) {
           markers.push({
-            position: { lat: data[i].y,lng: data[i].x,}, 
+            position: { lat: data[i].y, lng: data[i].x,}, 
             content: data[i].place_name, 
           })
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x)) 
         } 
         setMarkers(markers)
         map.setBounds(bounds) // 지도 표시해주는 것?
-        console.log(bounds)
       }
     })
   }, [map, searchPlace])
@@ -62,14 +63,13 @@ function AddMarker (){
 
       {onFav == true &&
         <>
-          <FavoritePlace
-            favPlace={favPlace}
-            setOnFav={setOnFav}
-          >
-
-          </FavoritePlace>
+          <FavoritePlace favPlace={favPlace} setOnFav={setOnFav} 
+            setPickedImg={setPickedImg} setReason={setReason} 
+            setNewPlaces={setNewPlaces} newPlaces={newPlaces}
+            reason={reason} pickedImg={pickedImg} placeList={placeList} 
+            setMarkers={setMarkers}
+          ></FavoritePlace>
         </>
-
       }
 
       <Map center={{lat: 37.508889538403885,lng: 126.88696767750605}}
@@ -86,6 +86,7 @@ function AddMarker (){
                 marker={marker}
                 onFav={onFav}
                 setOnFav={setOnFav}
+                setPlaceList={setPlaceList}
               ></SearchList>
             ))
             }
@@ -95,40 +96,71 @@ function AddMarker (){
               setOnFav(false)
               })}
             >닫기</button>
-            </div> : 
+            </div> :
           null
         }
         
-        {markers.map((marker) => (
-          <MapMarker
-            key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
-            position={marker.position}
-          >
-          </MapMarker>
+        {newPlaces.map((newPlace) => (
+          <React.Fragment key={newPlace.content}>
+            <MapMarker
+              className="usermarker"
+              position={newPlace.position}
+              key={`newPlace-${newPlace.content}-${newPlace.position.lat},${newPlace.position.lng}`}
+              image={{
+                src: newPlace.picture,
+                size: {width: 40,height: 40},
+                options: {offset: {x: 15, y: 60,},},
+              }}
+              onClick={() => setDescription(!description)}
+            >
+            </MapMarker>
+            <CustomOverlayMap
+              position={newPlace.position}
+              key={`newPlace-${newPlace.content}-${newPlace.position.lat},${newPlace.position.lng}`}
+            >
+              <div className="realdots"
+                style={{padding:"9px", 
+                backgroundColor:"#5e62db", 
+                color:"#fff",
+                borderRadius: "15px"
+                }}
+              >
+              {newPlace.content}
+              </div>
+            </CustomOverlayMap>
+            {
+              {description} == true && 
+              <div>{newPlace.descripton}</div>
+            }
+          </React.Fragment>
         ))}
 
         {markers.map((marker) => (
-          <CustomOverlayMap 
-            position={marker.position}
-            key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
-          >
-            <div className="nametag"
-              style={{padding:"6px", 
-              backgroundColor:"#fff", 
-              color:"#000",
-              borderRadius: "15px"
-              }}
+          <React.Fragment key={marker.content}>
+            <MapMarker
+              key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
+              position={marker.position}
             >
-            {marker.content}
-            </div>
-          </CustomOverlayMap>
+            </MapMarker>
+            <CustomOverlayMap 
+              position={marker.position}
+              key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
+            >
+              <div className="nametag"
+                style={{padding:"6px", 
+                backgroundColor:"#fff", 
+                color:"#000",
+                borderRadius: "15px"
+                }}
+              >
+              {marker.content}
+              </div>
+            </CustomOverlayMap>
+          </React.Fragment>
         ))}
 
         <CustomOverlayMap 
-          position={{ 
-            lat: 37.508889538403885,
-            lng: 126.88696767750605
-          }}
+          position={{ lat: 37.508889538403885, lng: 126.88696767750605}}
         >
           <div className="realdots"
             style={{padding:"9px", 
@@ -159,7 +191,8 @@ function AddMarker (){
               },
             }}
           >
-        </MapMarker>  
+        </MapMarker>
+        
       </Map>
       <SearchButton
         inputPlace={inputPlace}
