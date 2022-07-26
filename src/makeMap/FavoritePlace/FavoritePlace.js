@@ -19,7 +19,8 @@ function FavoritePlace({setMarkers, reason, placeList, setPlaceList, setNewPlace
 
     let userpicture=''
     if(heartRef.current.className == "clicked"){
-      userpicture="image/vector.png"} else {
+      userpicture="image/vector.png"
+    } else {
       userpicture="image/star.png"
     }
 

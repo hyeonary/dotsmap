@@ -1,10 +1,9 @@
 import {useState} from 'react';
 import './PlaceSearch.css'
 
-function PlaceSearch ({searchPlace, setSearchPlace, inputPlace, setInputPlace, placeList, setPlaceList}){
+function PlaceSearch ({setSearchPlace, inputPlace, setInputPlace, placeList, setPlaceList}){
 
     const [inputText, setInputText] = useState('')
-    //const [Place, setPlace] = useState('')
   
     const onChange = (e) => { // input에 들어간 값 가져오기
       setInputText(e.target.value)
@@ -12,10 +11,10 @@ function PlaceSearch ({searchPlace, setSearchPlace, inputPlace, setInputPlace, p
   
     const handleSubmit = (e) => {
       e.preventDefault() // 제출폼 리로드 방지
-      {setSearchPlace(inputText)}
+      setSearchPlace(inputText)
       setInputText('')
-      {setInputPlace(!inputPlace)}
-      {setPlaceList(!placeList)}
+      setInputPlace(!inputPlace)
+      setPlaceList(!placeList)
     }
 
     return(

@@ -125,12 +125,25 @@ function AddMarker (){
                 borderRadius: "15px"
                 }}
               >
-              {newPlace.content}
+                {newPlace.content}
               </div>
             </CustomOverlayMap>
             {
-              {description} == true && 
-              <div>{newPlace.descripton}</div>
+              description == true && 
+              <CustomOverlayMap
+                key={`newPlace-${newPlace.content}-${newPlace.position.lat},${newPlace.position.lng}`}
+                position={newPlace.position}
+              >
+               <div className="userdescription"
+                style={{padding:"5px",
+                backgroundColor:"white", 
+                color:"black",
+                borderRadius: "15px"
+                }}
+                >
+                  {newPlace.description}
+                </div>
+              </CustomOverlayMap>
             }
           </React.Fragment>
         ))}
